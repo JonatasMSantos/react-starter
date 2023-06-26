@@ -1,13 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./style.css";
 
+import { useDispatch } from "react-redux";
 import { Card } from "../../components/Card";
+import { Header } from "../../components/Header";
+import LoginService from "../../services/login.api";
 import { Pessoa } from "../../types/pessoa";
+import { User } from "../../types/user";
+import UserActionTypes from "../../redux/user/action.types";
 
 export function Home() {
   const [name, setName] = useState<string>("");
   const [pessoas, setPessoas] = useState<Pessoa[]>([]);
-  const [user, setUser] = useState({ name: "", avatar: "" });
+
+  const dispatch = useDispatch();
+
+  const handleLoginClick = async () => {
+    const response = await new LoginService().signin(
+      "https://api.github.com/users/JonatasMSantos"
+    );
+
+    const loggedUser: User = {
+      name: response.name,
+      login: response.login,
+      avatar: response.avatar_url,
+    };
+
+    dispatch({
+      type: UserActionTypes.LOGIN,
+      payload: loggedUser,
+    });
+  };
+
+  const handleLogoutClick = async () => {
+    dispatch({
+      type: UserActionTypes.LOGOUT,
+    });
+  };
 
   function handleAddPessoa() {
     const novaPessoa: Pessoa = {
@@ -22,30 +51,18 @@ export function Home() {
     setPessoas((prevState) => [...prevState, novaPessoa]);
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(
-        "https://api.github.com/users/JonatasMSantos"
-      );
-      const data = await response.json();
-      setUser({
-        name: data.name,
-        avatar: data.avatar_url,
-      });
-    }
-
-    fetchData();
-  }, []);
+  //useEffect(() => {
+  //}, []);
 
   return (
     <div className="container">
-      <header>
-        <h1>Lista de presença</h1>
-        <div>
-          <strong>{user.name}</strong>
-          <img src={user.avatar} alt="Foto de Perfil" />
-        </div>
-      </header>
+      <Header
+        title="Lista de presença"
+        onLogout={handleLogoutClick}
+        onLogin={handleLoginClick}
+      ></Header>
+
+      <header></header>
 
       <input
         type="text"
