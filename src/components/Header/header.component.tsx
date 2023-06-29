@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import "./header.style.component.css";
-import { UserState } from "../../redux/user/user.reducer";
+
 import { User } from "../../types/user";
 import {
   selectProductsCount,
   selectProductsTotalPrice,
-} from "../../redux/cart/cart.reducer";
+} from "../../redux/with-toolkit/cart.slice";
+import { UserState } from "../../redux/with-toolkit/user.slice";
 
 export type HeaderItems = {
   className?: string;
@@ -23,14 +24,6 @@ export function Header(props: HeaderItems) {
   const { currentUser } = useSelector(
     (rootReducer: { userReducer: UserState }) => rootReducer.userReducer
   );
-
-  // const { products } = useSelector(
-  //   (rootReducer: { cartReducer: CartState }) => rootReducer.cartReducer
-  // );
-
-  // const productsCount = useMemo(() => {
-  //   return products.reduce((acc, curr) => acc + curr.quantity, 0);
-  // }, [products]);
 
   const productsCount = useSelector(selectProductsCount);
   const productsTotalPrice = useSelector(selectProductsTotalPrice);

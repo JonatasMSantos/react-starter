@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { Product } from "../../types/product";
+import { Product } from "../../../types/product";
 
 export enum CartActionTypes {
   ADD_PRODUCT = "cart/addProduct",

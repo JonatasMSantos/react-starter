@@ -1,8 +1,12 @@
 import { useSelector } from "react-redux";
 import { ReactNode } from "react";
 import "./modal.style.component.css";
-import { CartState } from "../../redux/cart/cart.reducer";
+
 import { Card } from "../Card/card.component";
+import {
+  CartState,
+  selectProductsTotalPrice,
+} from "../../redux/with-toolkit/cart.slice";
 
 interface ModalType {
   children?: ReactNode;
@@ -15,7 +19,9 @@ export default function Modal(props: ModalType) {
     (rootReducer: { cartReducer: CartState }) => rootReducer.cartReducer
   );
 
-  console.log(products);
+  const productsTotalPrice: number = useSelector(selectProductsTotalPrice);
+
+  console.log("AQUI", products);
 
   return (
     <>
@@ -32,6 +38,9 @@ export default function Modal(props: ModalType) {
             ) : (
               <></>
             )}
+
+            <hr />
+            <p>Total: {productsTotalPrice}</p>
           </div>
         </div>
       )}

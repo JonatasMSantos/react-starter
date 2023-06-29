@@ -1,8 +1,8 @@
 import {
-  decreaseProductFromCart,
-  increaseProductFromCart,
-  removeProductFromCart,
-} from "../../redux/cart/cart.reducer";
+  decreaseProductQuantity,
+  increaseProductQuantity,
+  removeProduct,
+} from "../../redux/with-toolkit/cart.slice";
 import { Product } from "../../types/product";
 import "./cardstyle.component.css";
 import { useDispatch } from "react-redux";
@@ -14,15 +14,15 @@ export function Card(props: { product: Product }) {
   const dispatch = useDispatch();
 
   const handleRemoveClick = () => {
-    dispatch(removeProductFromCart({ name: product.name }));
+    dispatch(removeProduct({ name: product.name }));
   };
 
   const handleIncreaseClick = () => {
-    dispatch(increaseProductFromCart({ name: product.name }));
+    dispatch(increaseProductQuantity({ name: product.name }));
   };
 
   const handleDecreaseClick = () => {
-    dispatch(decreaseProductFromCart({ name: product.name }));
+    dispatch(decreaseProductQuantity({ name: product.name }));
   };
 
   return (

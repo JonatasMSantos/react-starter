@@ -4,12 +4,12 @@ import { Card } from "../../components/Card/card.component";
 import { Header } from "../../components/Header/header.component";
 import Modal from "../../components/Modal/modal.component";
 import useModal from "../../hooks/useModal";
-import { loginUser, logoutUser } from "../../redux/user/user.reducer";
 import LoginService from "../../services/login.api";
 import { ProductService } from "../../services/product.api";
 import { Product } from "../../types/product";
 import "./home.page.styles.css";
-import { addProductToCart } from "../../redux/cart/cart.reducer";
+import { login, logout } from "../../redux/with-toolkit/user.slice";
+import { addProduct } from "../../redux/with-toolkit/cart.slice";
 
 export function Home() {
   const [name, setName] = useState<string>("");
@@ -19,18 +19,18 @@ export function Home() {
 
   const handleLoginClick = async () => {
     const loggedUser = await new LoginService().signin();
-    dispatch(loginUser(loggedUser));
+    dispatch(login(loggedUser));
   };
 
   const handleLogoutClick = async () => {
-    dispatch(logoutUser());
+    dispatch(logout());
   };
 
   const handleAddProduct = async () => {
     const newProduct: Product = await new ProductService().newProduct(name);
     setProducts((prevState) => [...prevState, newProduct]);
 
-    dispatch(addProductToCart(newProduct));
+    dispatch(addProduct(newProduct));
   };
 
   const { isOpen, toggle } = useModal();

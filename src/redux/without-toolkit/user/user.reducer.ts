@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { User } from "../../types/user";
+import { User } from "../../../types/user";
 
 export enum UserActionTypes {
   LOGIN = "users/login",
