@@ -1,11 +1,22 @@
+import { User } from "../types/user";
+
 export default class LoginService {
   constructor() {
     return;
   }
 
-  async signin(repo: string) {
+  async signin(): Promise<User> {
+    const repo = "https://api.github.com/users/JonatasMSantos";
+
     const response = await fetch(repo);
     const data = await response.json();
-    return data;
+
+    const loggedUser: User = {
+      name: data.name,
+      login: data.login,
+      avatar: data.avatar_url,
+    };
+
+    return loggedUser;
   }
 }

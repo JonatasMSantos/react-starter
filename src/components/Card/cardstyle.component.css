@@ -1,6 +1,6 @@
 .card {
   height: 100px;
-  width: 50%;
+  width: 100%;
 
   background: #735bf2;
   color: #fff;
@@ -16,4 +16,16 @@
 
 .card strong {
   font-size: 18px;
+}
+
+.card small {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.action-item {
+  cursor: pointer;
 }
