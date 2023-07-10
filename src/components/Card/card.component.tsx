@@ -7,6 +7,9 @@ import { Product } from "../../types/product";
 import "./cardstyle.component.css";
 import { useDispatch } from "react-redux";
 
+import { CgClose } from "react-icons/cg";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+
 //export function Card({ name, time }: Props) {
 export function Card(props: { product: Product }) {
   const { product } = props;
@@ -27,20 +30,20 @@ export function Card(props: { product: Product }) {
 
   return (
     <div className="card">
-      <strong>
+      <div className="title">
         {product.name} Qt| : {product.quantity} | Price: {product.price}
-      </strong>
-      <small>
-        <span className="action-item" onClick={handleRemoveClick}>
-          🗑️
-        </span>
-        <span className="action-item" onClick={handleDecreaseClick}>
-          ➖
-        </span>
-        <span className="action-item" onClick={handleIncreaseClick}>
-          ➕
-        </span>
-      </small>
+      </div>
+      <div className="buttons-section">
+        <button className="action-item" onClick={handleRemoveClick}>
+          <CgClose />
+        </button>
+        <button className="action-item" onClick={handleDecreaseClick}>
+          <AiOutlineMinus />
+        </button>
+        <button className="action-item" onClick={handleIncreaseClick}>
+          <AiOutlinePlus />
+        </button>
+      </div>
     </div>
   );
 }

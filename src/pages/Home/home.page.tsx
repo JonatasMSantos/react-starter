@@ -10,10 +10,13 @@ import { Product } from "../../types/product";
 import "./home.page.styles.css";
 import { login, logout } from "../../redux/with-toolkit/user.slice";
 import { addProduct } from "../../redux/with-toolkit/cart.slice";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
   const [name, setName] = useState<string>("");
   const [products, setProducts] = useState<Product[]>([]);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -33,6 +36,10 @@ export function Home() {
     dispatch(addProduct(newProduct));
   };
 
+  const handleGoToTask = () => {
+    navigate("/tasks");
+  };
+
   const { isOpen, toggle } = useModal();
 
   return (
@@ -45,13 +52,15 @@ export function Home() {
         handleCartClick={toggle}
       ></Header>
 
+      <p onClick={handleGoToTask}>Tasks</p>
+
       <input
         type="text"
         placeholder="Digite o nome"
         onChange={(e) => setName(e.target.value)}
       />
 
-      <button type="button" onClick={handleAddProduct}>
+      <button className="button-itens" type="button" onClick={handleAddProduct}>
         Adicionar
       </button>
 

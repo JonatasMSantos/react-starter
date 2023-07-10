@@ -14,11 +14,11 @@
   padding: 24px;
 }
 
-.card strong {
+.card .title {
   font-size: 18px;
 }
 
-.card small {
+.card .buttons-section {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -27,5 +27,10 @@
 }
 
 .action-item {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  margin: 10px;
+  color: #fff;
   cursor: pointer;
 }
